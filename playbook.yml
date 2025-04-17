@@ -1,0 +1,42 @@
+---
+- name: Deploy Final_Project Java Application
+  hosts: managed_node
+  become: yes
+  tasks:
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Clone Final_Project repository
+      git:
+        repo: https://github.com/Omareldeeb7/Final_Project.git
+        dest: /opt/final_project
+        version: main
+
+    - name: Build and run Docker container
+      docker_container:
+        name: final_project_app
+        image: final_project:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:8080"
+        volumes:
+          - /opt/final_project:/app
+      async: 45
+      poll: 0
+
+    - name: Wait for application to be available
+      wait_for:
+        host: "{{ ansible_host }}"
+        port: 8080
+        state: started
+        timeout: 300
