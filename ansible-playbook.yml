@@ -1,0 +1,69 @@
+-
+    name: Deployment
+    hosts: localhost
+    tasks:
+  
+      - name: stop petstore-webapp
+        command: docker stop petstore-webapp
+        ignore_errors: yes
+
+      - name: stop prometheus
+        command: docker stop prometheus
+        ignore_errors: yes
+
+      - name: stop grafana
+        command: docker stop grafana
+        ignore_errors: yes
+
+      - name: stop node-exporter
+        command: docker stop node-exporter
+        ignore_errors: yes
+  
+      - name: remove petstore-webapp
+        command: docker rm petstore-webapp
+        ignore_errors: yes
+
+      - name: remove prometheus
+        command: docker rm prometheus
+        ignore_errors: yes
+
+      - name: remove grafana
+        command: docker rm grafana
+        ignore_errors: yes
+
+      - name: remove node-exporter
+        command: docker rm node-exporter
+        ignore_errors: yes
+  
+      - name: remove previous image with same name
+        command: docker rmi mostafaahmed500/finalproject
+        ignore_errors: yes
+  
+      - name: building the image
+        command: docker build -t mostafaahmed500/finalproject .
+  
+      - name: push the image to Docker-hub
+        command: docker push mostafaahmed500/finalproject
+  
+      - name: run a container from pushed image
+        command: docker run -d -p 8089:8080 --name petstore-webapp mostafaahmed500/finalproject
+
+      - name: run prometheus
+        command: docker run -d --name=prometheus -p 9090:9090  -v ./prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+
+      - name: run node-exporter
+        command: docker run -d --name=node-exporter -p 9100:9100 prom/node-exporter
+        
+      - name: Ensure Grafana data directory exists
+        file:
+          path: "grafana"
+          state: directory
+
+      - name: Set Grafana data directory permissions recursively
+        file:
+          path: "grafana"
+          mode: '0777'
+          recurse: yes
+
+      - name: run grafana
+        command: docker run -d --name=grafana -p 3000:3000 -v ./grafana:/var/lib/grafana grafana/grafana
