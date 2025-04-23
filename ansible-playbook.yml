@@ -36,17 +36,17 @@
         ignore_errors: yes
   
       - name: remove previous image with same name
-        command: docker rmi mostafaahmed500/finalproject
+        command: docker rmi ahmedsameh1600/final_project
         ignore_errors: yes
   
       - name: building the image
-        command: docker build -t mostafaahmed500/finalproject .
+        command: docker build -t ahmedsameh1600/final_project .
   
       - name: push the image to Docker-hub
-        command: docker push mostafaahmed500/finalproject
+        command: docker push ahmedsameh1600/final_project
   
       - name: run a container from pushed image
-        command: docker run -d -p 8089:8080 --name petstore-webapp mostafaahmed500/finalproject
+        command: docker run -d -p 8089:8080 --name petstore-webapp ahmedsameh1600/final_project
 
       - name: run prometheus
         command: docker run -d --name=prometheus -p 9090:9090  -v ./prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
