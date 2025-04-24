@@ -46,14 +46,15 @@
         command: docker push ahmedsameh1600/final_project
   
       - name: run a container from pushed image
-        command: docker run -d -p 8089:8080 --name petstore-webapp ahmedsameh1600/final_project
+        command: docker run -d -p 8089:8080 --name petstore-webapp --network=app ahmedsameh1600/final_project
+        
 
       - name: run prometheus
-        command: docker run -d --name=prometheus -p 9090:9090  -v ./prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+        command: docker run -d --name=prometheus -p 9090:9090  -v ./prometheus.yml:/etc/prometheus/prometheus.yml --network=app prom/prometheus
 
       - name: run node-exporter
-        command: docker run -d --name=node-exporter -p 9100:9100 prom/node-exporter
+        command: docker run -d --name=node-exporter -p 9100:9100 --network=app prom/node-exporter
         
     
       - name: run grafana
-        command: docker run -d --name=grafana -p 3000:3000 grafana/grafana
+        command: docker run -d --name=grafana -p 3000:3000 --network=app grafana/grafana
