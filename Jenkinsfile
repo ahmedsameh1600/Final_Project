@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build Maven') {
             steps {
-                echo 'Building the application...'
+                echo '🔧 Building the application...'
                 sh 'chmod +x mvnw'
                 sh './mvnw clean package'
             }
@@ -18,19 +18,24 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Testing the application...'
+                echo '🧪 Testing the application...'
                 sh './mvnw test'
             }
         }
 
         stage('Login to DockerHub') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                echo '🔐 Logging into DockerHub...'
+                sh '''
+                    set -e
+                    echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                '''
             }
         }
 
-        stage('Build & Push using Ansible & Run prometheus, grafana and node-exporter') {
+        stage('Build & Push using Ansible & Run Prometheus, Grafana, Node Exporter') {
             steps {
+                echo '🚀 Running Ansible playbook...'
                 sh 'ansible-playbook ansible-playbook.yml'
             }
         }
@@ -38,7 +43,8 @@ pipeline {
 
     post {
         always {
-            sh 'docker logout'
+            echo '🔚 Logging out from Docker...'
+            sh 'docker logout || true'
         }
     }
 }
