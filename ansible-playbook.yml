@@ -54,16 +54,6 @@
       - name: run node-exporter
         command: docker run -d --name=node-exporter -p 9100:9100 prom/node-exporter
         
-      - name: Ensure Grafana data directory exists
-        file:
-          path: "grafana"
-          state: directory
-
-      - name: Set Grafana data directory permissions recursively
-        file:
-          path: "grafana"
-          mode: '0777'
-          recurse: yes
-
+    
       - name: run grafana
         command: docker run -d --name=grafana -p 3000:3000 -v ./grafana:/var/lib/grafana grafana/grafana
