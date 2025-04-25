@@ -11,8 +11,6 @@ This is a simple Java web app that needs to have an automated CI/CD using the De
 - Docker -> dockerize the app
 - Jenkins -> CI/CD
 - Ansible -> deploy by running a container of the app
-- Terraform (Plus) -> to create the EC2 on AWS 
-- AWS (plus) -> EC2 machine that shall run the pipeline and host the application
 
 ## The requirements
 
