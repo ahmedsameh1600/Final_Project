@@ -1,11 +1,11 @@
-FROM openjdk:21
+# Use an official Tomcat image as the base
+FROM tomcat:9.0
 
-WORKDIR /usr/src/myapp
+# Copy the built WAR file into the Tomcat webapps directory
+COPY target/*.war /usr/local/tomcat/webapps/jpetstore.war
 
-COPY . .
-
+# Expose port 8080
 EXPOSE 8080
 
-RUN chmod +x ./mvnw
-
-CMD ["./mvnw", "cargo:run", "-P", "tomcat90"]
+# Start Tomcat server
+CMD ["catalina.sh", "run"]
