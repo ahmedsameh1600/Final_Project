@@ -1,44 +1,135 @@
-### Final Java DevOps CI/CD project.
+Certainly! Here's the **README** content as raw code that you can copy and paste directly into your `README.md` file on GitHub:
 
-## Description 
+```markdown
+# Final Project 
 
-This is a simple Java web app that needs to have an automated CI/CD using the DevOps toolset. The Application shall be running as a container on the same VM on port 8080. Test the application by visiting this URL http://localhost:8080/jpetstore.
+This repository contains the code and resources for my **Final Project**. It demonstrates how to build and deploy a web application using modern tools such as **Docker** and **Ansible**. The project aims to provide a robust and scalable environment for running the application in production.
 
-## The used tools
+## Features
 
-- Git/Github -> clone the code.
-- Maven -> build the code.
-- Docker -> dockerize the app
-- Jenkins -> CI/CD
-- Ansible -> deploy by running a container of the app
+- **Dockerized Web Application**: The application is packaged into Docker containers to ensure consistency across different environments.
+- **Automated Deployment with Ansible**: Ansible playbooks are used to automate the setup, configuration, and deployment process of the application.
+- **CI/CD Pipeline**: The project is set up with an automated pipeline to push the application image to Docker Hub and deploy it seamlessly.
 
-## The requirements
+## Table of Contents
 
-1- CI/CD pipeline that do as following 
+1. [Prerequisites](#prerequisites)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Run the Application](#run-the-application)
+5. [Troubleshooting](#troubleshooting)
+6. [License](#license)
 
-CI:
-- Clone the source code.
-- Build the code using mvnw (already in the repo)
-- Test the code using mvnw (already in the repo)
-- Dockerize the application and push it to dockerhub
+## Prerequisites
 
-CD:
-- Deploy the application by running a container from the image using Ansible.
-- Apply the monitoring on the machine using Prometheus. 
+Before you begin, ensure you have the following tools installed:
 
-2- Create the EC2 instance using terraform instead of using the local VM (Plus)
+- **Docker**: For containerization and managing application instances.
+  - Installation guide: [Docker Installation](https://docs.docker.com/get-docker/)
+- **Ansible**: For automating infrastructure management and deployment.
+  - Installation guide: [Ansible Installation](https://docs.ansible.com/ansible/latest/installation_guide/index.html)
 
-## The expected delevirable
+## Installation
 
-Github repo containes 
-- The src code.
-- The Dockerfile
-- The Jenkinsfile
-- The Ansible Playbook
+Follow these steps to get your development environment set up:
 
-## Note 
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/ahmedsameh1600/Final_Project.git
+   cd Final_Project
+   ```
 
-This application build is resulting a .war file not .jar as we saw before. This needs a change in the command that is used to run the application. We will use mvnw as well to run the application as shown below. Here's the command used to run the app:
+2. **Build Docker Image**:
+   The Docker image for the web application can be built using the following command:
+   ```bash
+   docker build -t <your-docker-username>/final_project .
+   ```
 
-./mvnw cargo:run -P tomcat90
+3. **Push to Docker Hub** (Optional):
+   If you want to push the image to Docker Hub:
+   ```bash
+   docker login
+   docker push <your-docker-username>/final_project
+   ```
 
+4. **Set Up the Docker Network** (Optional but recommended):
+   If your project requires a custom Docker network, create it first:
+   ```bash
+   docker network create app
+   ```
+
+5. **Run the Application**:
+   ```bash
+   docker run -d -p 8089:8080 --name petstore-webapp --network=app <your-docker-username>/final_project
+   ```
+
+6. **Automate with Ansible**:
+   The project includes Ansible playbooks to automate the setup of Docker containers and networking. Run the Ansible playbook using:
+   ```bash
+   ansible-playbook -i inventory.ini playbook.yml
+   ```
+
+## Usage
+
+Once the application is up and running, you can access it by visiting:
+
+```
+http://localhost:8089
+```
+
+This will load the web application running on port `8089`.
+
+---
+
+## Run the Application
+
+You can use **Docker Compose** (if applicable) to quickly run all the services:
+
+1. **Start Services**:
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Stop Services**:
+   ```bash
+   docker-compose down
+   ```
+
+---
+
+## Troubleshooting
+
+### Common Issues:
+
+1. **Docker Network Not Found**:
+   If you receive a `network not found` error when trying to run the container, ensure that the Docker network exists:
+   ```bash
+   docker network create app
+   ```
+
+2. **Permission Denied to Docker Daemon**:
+   If you encounter permission errors while interacting with Docker, ensure that your user is added to the `docker` group:
+   ```bash
+   sudo usermod -aG docker $USER
+   ```
+
+   Then log out and log back in.
+
+---
+
+## License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+### Contributions
+
+If you’d like to contribute to this project, feel free to fork the repository, create a new branch, and submit a pull request. Please ensure that your code follows the [coding standards](#) and passes all the necessary tests.
+```
+
+---
+
+Simply copy and paste this into your `README.md` file in your project directory on GitHub.
+
+Let me know if you need further changes!
