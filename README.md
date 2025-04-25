@@ -1,4 +1,7 @@
 # Final Project
+# Ahmed Sameh Sobhy
+#ahmedsameh1600@gmail.com
+
 
 This repository contains the code and resources for my **Final Project**. The project demonstrates how to build and deploy a web application using Docker, Jenkins, Ansible, and other modern tools. It includes an automated CI/CD pipeline managed by Jenkins for continuous integration and deployment.
 
@@ -41,7 +44,7 @@ Before you begin, ensure you have the following tools installed:
 2. **Build Docker Image**:
    Build the Docker image for the web application.
 
-3. **Push to Docker Hub** (Optional):
+3. **Push to Docker Hub** :
    If you want to push the image to Docker Hub, you need to authenticate and push the image.
 
 4. **Set Up the Docker Network** (Optional but recommended):
@@ -158,7 +161,6 @@ This will load the web application running on port `8089`.
 
 ## Running the Application
 
-You can use **Docker Compose** (if applicable) to quickly run all the services:
 
 1. **Start Services**:
    Use Docker Compose to start the application and its dependencies.
