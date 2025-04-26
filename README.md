@@ -19,7 +19,6 @@ This repository contains the code and resources for my **Final Project**. The pr
 4. [Usage](#usage)
 5. [Running the Application](#running-the-application)
 6. [Troubleshooting](#troubleshooting)
-7. [License](#license)
 
 ## Prerequisites
 
