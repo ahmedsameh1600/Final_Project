@@ -1,7 +1,7 @@
 # Final Project
 # Ahmed Sameh Sobhy
-##ahmedsameh1600@gmail.com
-##https://www.linkedin.com/in/ahmed-sameh-sobhy/
+#ahmedsameh1600@gmail.com
+#https://www.linkedin.com/in/ahmed-sameh-sobhy/
 
 This repository contains the code and resources for my **Final Project**. The project demonstrates how to build and deploy a web application using Docker, Jenkins, Ansible, and other modern tools. It includes an automated CI/CD pipeline managed by Jenkins for continuous integration and deployment.
 
