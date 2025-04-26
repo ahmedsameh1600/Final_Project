@@ -182,16 +182,6 @@ This will load the web application running on port `8089`.
 
 ---
 
-## License
-
-This project is licensed under the **Apache-2.0 License** - see the [LICENSE](LICENSE) file for details.
-
----
-
-### Contributions
-
-If you’d like to contribute to this project, feel free to fork the repository, create a new branch, and submit a pull request. Please ensure that your code follows the [coding standards](#) and passes all the necessary tests.
-```
 
 ---
 
